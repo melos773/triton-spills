@@ -73,3 +73,7 @@ which tiles fit.
 One shape, one GPU, a medium-sized hidden layer. A large hidden size (`H` of a few thousand,
 as in real models) needs the hidden dimension tiled too, with partial sums for the second
 matmul; this kernel keeps the whole hidden row in registers, so it stops at `H = 512` here.
+
+## Thanks
+
+To Shane ([@ShaneDasPro](https://github.com/ShaneDasPro)), who first got me into Triton.
