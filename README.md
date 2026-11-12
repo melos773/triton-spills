@@ -44,8 +44,8 @@ fits. At `BLOCK_M = 64` with 4 warps the kernel needs every register a thread ca
 | 224 | 0 | 484 | 1.17x |
 | 255 | 0 | 479 | 1.18x |
 
-The same kernel with the same tile runs **4x slower** when it spills. The results are bit for
-bit the same, so nothing in the output warns you; only the compiler's numbers show it.
+The same kernel with the same tile runs **4x slower** when it spills. The results are just as
+correct, so nothing in the output warns you; only the compiler's numbers show it.
 
 ## What to take from it
 
