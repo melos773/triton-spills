@@ -1,5 +1,11 @@
 # Fused MLP in Triton: tiles, registers and spills
 
+I once spent a while convinced one of my GPU kernels was slow because of how it read memory,
+and started planning a rewrite. The real cause was invisible in the code: the compiler had run
+out of registers and was quietly spilling them to memory. One launch option fixed it. Since
+then I check the compiler's numbers before touching the code, and this repo is a small,
+self-contained demo of why.
+
 One Triton kernel computes a transformer-style MLP block, `y = gelu(x @ W1) @ W2`, without
 writing the hidden activations to memory. At the right tile size it is **1.2x faster than
 PyTorch's cuBLAS path** (two matmuls plus a GELU kernel). The point of the repo is the
