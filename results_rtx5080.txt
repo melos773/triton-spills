@@ -1,0 +1,22 @@
+M=131072 D=256 H=256   torch (cuBLAS, 3 kernels):   564.7 us
+
+1) tile size and warps (compiler picks the registers)
+BLOCK_M warps maxnreg  regs spills  time us vs torch  max err
+     16     4       -    92      0    684.3    0.83x  0.0020
+     16     8       -    60      0    720.6    0.78x  0.0020
+     32     4       -   128      0    603.7    0.94x  0.0020
+     32     8       -    78      0    634.3    0.89x  0.0020
+     64     4       -   255      0    477.2    1.18x  0.0020
+     64     8       -   128      0    469.1    1.20x  0.0020
+    128     4       -   does not fit (shared memory)
+    128     8       -   does not fit (shared memory)
+
+2) register budget at BLOCK_M=64, 4 warps (maxnreg caps registers per thread)
+BLOCK_M warps maxnreg  regs spills  time us vs torch  max err
+     64     4      64    64    278   1937.8    0.29x  0.0020
+     64     4      96    96    230   1511.3    0.37x  0.0020
+     64     4     128   128    152   1039.9    0.54x  0.0020
+     64     4     160   160     58    607.8    0.93x  0.0020
+     64     4     192   192      4    498.9    1.13x  0.0020
+     64     4     224   224      0    484.3    1.17x  0.0020
+     64     4     255   255      0    479.1    1.18x  0.0020
